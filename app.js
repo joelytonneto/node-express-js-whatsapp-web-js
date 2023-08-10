@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require("cors");
 const express = require('express');
 const bodyParser = require("body-parser");
 const routerWhatsAppWeb = require("./routes/api/whatsAppWeb/api");
