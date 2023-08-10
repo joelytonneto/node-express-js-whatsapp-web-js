@@ -6,6 +6,12 @@ const client = require('./utils/whatsApp/whatsappManager');
 
 const app = express();
 
+app.use(
+    cors({
+      origin: '*'
+    })
+);
+
 app.use(bodyParser.json());
 app.use("/whatsAppWeb", routerWhatsAppWeb);
 
