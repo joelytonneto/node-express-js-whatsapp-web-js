@@ -27,7 +27,17 @@ exports.enviarMensagemWhatsAppWeb = async (req, res, next) => {
         })
         .catch(error => {
             res.status(500).json({ error: 'Erro ao enviar mensagem.' });
-        });    
+        });
+
+    //Envio de PDF
+    const media = await MessageMedia.fromUrl('https://logos-cliente.s3.us-east-2.amazonaws.com/propostaSimulador.pdf');    
+    client.sendMessage(numeroFormatado, media, { caption: 'PDF' })
+        .then(response => {            
+            res.status(200).json({ message: 'Mensagem enviada com sucesso!' });
+        })
+        .catch(error => {
+            res.status(500).json({ error: 'Erro ao enviar mensagem.' });
+        });
     
     // Envio de imagem 
     // const media = MessageMedia.fromFilePath(`assets/images/pin.png`);
