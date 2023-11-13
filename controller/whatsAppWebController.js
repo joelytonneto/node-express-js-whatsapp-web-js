@@ -20,7 +20,7 @@ exports.enviarMensagemWhatsAppWeb = async (req, res, next) => {
     //     numeroFormatado = numero + '@c.us';
     // }
 
-    let numeroFormatado = numero + '@c.us';
+    let numeroFormatado = numero;
 
     let to = numeroFormatado;
     let contactId;
@@ -38,7 +38,7 @@ exports.enviarMensagemWhatsAppWeb = async (req, res, next) => {
     }
 
     // Enviar mensagem comum personalisável
-    client.sendMessage(to, mensagem)
+    client.sendMessage(to + '@c.us', mensagem)
         .then(response => {            
             res.status(200).json({ message: 'Mensagem enviada com sucesso!' });
         })
