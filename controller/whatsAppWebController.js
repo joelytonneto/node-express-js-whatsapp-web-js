@@ -22,8 +22,23 @@ exports.enviarMensagemWhatsAppWeb = async (req, res, next) => {
 
     let numeroFormatado = numero + '@c.us';
 
+    let to = numeroFormatado;
+    let contactId;
+
+    if (to.startsWith('55') && to.length == 13 && to[4] == 9) {
+        contactId = await client.getNumberId(to.slice(0, 4) + to.slice(5));
+    }
+
+    if (!contactId) {
+        contactId = await client.getNumberId(to);
+    }
+      
+    if (contactId) {
+        to = contactId.user;
+    }
+
     // Enviar mensagem comum personalisável
-    client.sendMessage(numeroFormatado, mensagem)
+    client.sendMessage(to, mensagem)
         .then(response => {            
             res.status(200).json({ message: 'Mensagem enviada com sucesso!' });
         })
