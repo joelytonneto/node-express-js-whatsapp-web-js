@@ -13,12 +13,14 @@ exports.enviarMensagemWhatsAppWeb = async (req, res, next) => {
         return res.status(400).json({ error: 'Token está inválido' });
     }
 
-    let numeroFormatado = '';
-    if (numero.length == 13) {
-        numeroFormatado = numero.slice(0, 4) + numero.slice(5) + '@c.us';
-    } else {
-        numeroFormatado = numero + '@c.us';
-    }
+    // let numeroFormatado = '';
+    // if (numero.length == 13) {
+    //     numeroFormatado = numero.slice(0, 4) + numero.slice(5) + '@c.us';
+    // } else {
+    //     numeroFormatado = numero + '@c.us';
+    // }
+
+    let numeroFormatado = numero + '@c.us';
 
     // Enviar mensagem comum personalisável
     client.sendMessage(numeroFormatado, mensagem)
