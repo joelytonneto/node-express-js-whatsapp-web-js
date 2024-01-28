@@ -13,7 +13,8 @@ app.use(
     })
 );
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb', extended: true, parameterLimit: 50000}));
 app.use("/whatsAppWeb", routerWhatsAppWeb);
 
 app.listen(process.env.API_PORT, () => {
